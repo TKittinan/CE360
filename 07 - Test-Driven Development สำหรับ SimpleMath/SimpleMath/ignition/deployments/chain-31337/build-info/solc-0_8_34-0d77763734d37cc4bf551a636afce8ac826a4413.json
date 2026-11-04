@@ -1,0 +1,49 @@
+{
+  "_format": "hh3-sol-build-info-1",
+  "id": "solc-0_8_34-0d77763734d37cc4bf551a636afce8ac826a4413",
+  "solcVersion": "0.8.34",
+  "solcLongVersion": "0.8.34+commit.80d5c536",
+  "compilerType": "solc",
+  "toolVersions": {
+    "hardhat": "3.21.0"
+  },
+  "userSourceNameMap": {
+    "contracts/SimpleMath.sol": "project/contracts/SimpleMath.sol"
+  },
+  "input": {
+    "language": "Solidity",
+    "settings": {
+      "evmVersion": "osaka",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "": [
+            "ast"
+          ],
+          "*": [
+            "abi",
+            "evm.bytecode.linkReferences",
+            "evm.bytecode.object",
+            "evm.bytecode.opcodes",
+            "evm.bytecode.sourceMap",
+            "evm.deployedBytecode.immutableReferences",
+            "evm.deployedBytecode.linkReferences",
+            "evm.deployedBytecode.object",
+            "evm.deployedBytecode.opcodes",
+            "evm.deployedBytecode.sourceMap",
+            "evm.methodIdentifiers"
+          ]
+        }
+      },
+      "remappings": []
+    },
+    "sources": {
+      "project/contracts/SimpleMath.sol": {
+        "content": "// SPDX-License-Identifier: UNLICENSED\npragma solidity ^0.8.34;\n\ncontract SimpleMath {\n  function add(uint x, uint y) public pure returns (uint) {\n    return x + y;\n  }\n  function subtract(uint x, uint y) public pure returns (uint) {\n    return x - y;\n  }\n  function multiply(uint x, uint y) public pure returns (uint) {\n    return x * y;\n  }\n  function divide(uint x, uint y) public pure returns (uint) {\n    return x / y;\n  }\n}"
+      }
+    }
+  }
+}
