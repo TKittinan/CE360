@@ -80,7 +80,7 @@ contract MyAuction is Auction {
             bids[highestBidder] = 0; // Reset the highest bidder's bid
         } else { // Other bidders can withdraw their bids
             bool allowed = ((STATE == AuctionState. ENDED && withdrawer != highestBidder) ||
-                (STATE == AuctionState.CANCELLED)) &&
+                (STATE == AuctionState.CANCELED)) &&
                 bids[withdrawer] > 0;
             require(allowed, "You are not allowed to withdraw");
             amount = bids[withdrawer];
@@ -88,7 +88,7 @@ contract MyAuction is Auction {
         }
         (bool sent, ) = payable(withdrawer).call{value: amount}("");
         require(sent, "Failed to send Ether");
-        emit WithdrawnEvent(withdrawer, amount, block.timestamp);
+        emit WithdrawEvent(withdrawer, amount, block.timestamp);
     }
     // ดูรายละเอียดสินค้า
     function getProductInfo() external view override 
