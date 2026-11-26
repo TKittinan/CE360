@@ -12,6 +12,9 @@ contract MyAuction is Auction {
 
     mapping(address => uint256) public bids; //เก็บยอดเงินที่ประมูลของแต่ละคน **mapping ออกสอบแน่นอน อาจารย์บอก ต้องจำ**
 
+    event EndedEvent(string message, uint256 timestamp);      // แจ้งว่าประมูลจบแล้ว
+    event CancelledEvent(string message, uint256 timestamp);  // แจ้งว่าประมูลถูกยกเลิก
+
     modifier onlyOwner() {
         require(msg.sender == owner, "Only owner can call this function"); // ใส่functionไหน จะได้ใช้ได้แค่เจ้าของเท่านั้น
         _;
@@ -34,7 +37,7 @@ contract MyAuction is Auction {
 
     function bid() external payable override notAnOwner onGoingAuction { //**ต้องจำ ออกสอบแน่นอน #1 อาจารย์บอก**
         require(
-            msg.value > highestBid, 
+            msg.value + bids[msg.sender] > highestBid, 
             "Bid must be higher than current highest bid"
         );           
         require(
@@ -57,15 +60,15 @@ contract MyAuction is Auction {
     }
 
     // จบการประมูล
-    function endAuction() onlyOwner onGoingAuction external override{
+    function endAuction() external override onlyOwner onGoingAuction{
         STATE = AuctionState.ENDED;
         emit EndedEvent("Auction has ended", block.timestamp);
     }
 
     // ยกเลิกการประมูล
-    function cancelAuction() onlyOwner onGoingAuction external override {
+    function cancelAuction() external override onlyOwner onGoingAuction {
         STATE = AuctionState.CANCELED;
-        emit CanceledEvent("Auction has been cancelled", block.timestamp);
+        emit CancelledEvent("Auction has been cancelled", block.timestamp);
     }
 
     // ถอนเงิน

@@ -1,6 +1,12 @@
 import { expect } from "chai";
 import { network } from "hardhat";
-const Product = require("../ignition/modules/product.json");
+//const Product = require("../ignition/modules/product.json");
+
+const Product = {
+  "Brand": "Iphone 99 Pro Max",
+  "SerialNumber": "IP99PM2024",
+  "Duration": 2
+};
 
 const { ethers } = await network.create();
 // [a,b,c]
